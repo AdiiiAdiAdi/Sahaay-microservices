@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sahaay - Municipal Issue Reporting</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app/globals.css">
+  <style>
+    .font-heading { font-family: 'Montserrat', sans-serif; }
+    .font-body { font-family: 'Open Sans', sans-serif; }
+    .bg-pattern {
+      background-image: radial-gradient(circle at 25% 25%, rgba(64, 224, 208, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 75% 75%, rgba(32, 178, 170, 0.1) 0%, transparent 50%);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-teal-50 via-white to-cyan-100 bg-pattern text-foreground font-body">
+
+  <!-- Login Page -->
+  <div id="loginPage" class="min-h-screen flex items-center justify-center">
+    <div class="glass-card p-8 w-full max-w-md rounded-2xl shadow-2xl">
+      <div class="text-center mb-8">
+        <h1 class="font-heading text-4xl font-black text-teal-600 mb-2">sahaay</h1>
+        <p class="text-gray-600">Report municipal issues in your city</p>
+      </div>
+      <form id="loginForm" class="space-y-6">
+        <div>
+          <label for="email" class="block text-sm font-medium mb-2 text-gray-700">Email</label>
+          <input type="email" id="email" name="email" required
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
+            placeholder="Enter your email">
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium mb-2 text-gray-700">Password</label>
+          <input type="password" id="password" name="password" required
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
+            placeholder="Enter your password">
+        </div>
+        <div>
+          <label for="userType" class="block text-sm font-medium mb-2 text-gray-700">Login as</label>
+          <select id="userType" name="userType"
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+            <option value="user">Citizen</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <button type="submit"
+          class="w-full bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg">
+          Sign In
+        </button>
+        <div class="text-center">
+          <button type="button" id="showRegister"
+            class="text-teal-600 hover:underline text-sm font-medium">
+            Don't have an account? Register here
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Registration Page -->
+  <div id="registerPage" class="min-h-screen flex items-center justify-center hidden">
+    <div class="glass-card p-8 w-full max-w-md rounded-2xl shadow-2xl">
+      <div class="text-center mb-8">
+        <h1 class="font-heading text-3xl font-black text-teal-600 mb-2">Register</h1>
+        <p class="text-gray-600">Create your sahaay account</p>
+      </div>
+      <form id="registerForm" class="space-y-6">
+        <div>
+          <label for="regName" class="block text-sm font-medium mb-2 text-gray-700">Full Name</label>
+          <input type="text" id="regName" name="name" required
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
+            placeholder="Enter your full name">
+        </div>
+        <div>
+          <label for="regEmail" class="block text-sm font-medium mb-2 text-gray-700">Email</label>
+          <input type="email" id="regEmail" name="email" required
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
+            placeholder="Enter your email">
+        </div>
+        <div>
+          <label for="regPassword" class="block text-sm font-medium mb-2 text-gray-700">Password</label>
+          <input type="password" id="regPassword" name="password" required
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
+            placeholder="Create a password">
+        </div>
+        <div>
+          <label for="regPhone" class="block text-sm font-medium mb-2 text-gray-700">Phone Number</label>
+          <input type="tel" id="regPhone" name="phone" required
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
+            placeholder="Enter your phone number">
+        </div>
+        <button type="submit"
+          class="w-full bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg">
+          Register
+        </button>
+        <div class="text-center">
+          <button type="button" id="showLogin"
+            class="text-teal-600 hover:underline text-sm font-medium">
+            Already have an account? Sign in here
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- User Dashboard -->
+  <div id="userDashboard" class="hidden min-h-screen">
+    <!-- Navigation -->
+    <nav class="glass-card border-b border-teal-200 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <h1 class="font-heading text-2xl font-black text-teal-600">sahaay</h1>
+          </div>
+          <div class="flex items-center space-x-6">
+            <button id="showReportPage" class="nav-tab active px-4 py-2 rounded-lg font-medium transition-all duration-200">Report Issue</button>
+            <button id="showViewPage" class="nav-tab px-4 py-2 rounded-lg font-medium transition-all duration-200">View Issues</button>
+            <span id="userName" class="text-sm text-gray-600 ml-4"></span>
+            <button id="logoutBtn" class="text-sm text-red-600 hover:underline font-medium">Logout</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Report Page -->
+    <div id="reportPage" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="glass-card rounded-2xl p-8 shadow-2xl">
+        <div class="flex items-center mb-8">
+          <div class="p-4 bg-gradient-to-r from-teal-500 to-cyan-600 rounded-2xl mr-6 shadow-lg">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z">
+              </path>
+            </svg>
+          </div>
+          <div>
+            <h2 class="font-heading text-3xl font-bold text-gray-800">Report an Issue</h2>
+            <p class="text-gray-600 mt-1">Help improve your community by reporting municipal issues</p>
+          </div>
+        </div>
+        <form id="reportForm" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="issueTitle" class="block text-sm font-semibold mb-3 text-gray-700">Issue Title</label>
+              <input type="text" id="issueTitle" name="title" required
+                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
+                placeholder="Brief description of the issue">
+            </div>
+            <div>
+              <label for="issueCategory" class="block text-sm font-semibold mb-3 text-gray-700">Category</label>
+              <select id="issueCategory" name="category"
+                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                <option value="road">🚧 Road & Traffic</option>
+                <option value="lighting">💡 Street Lighting</option>
+                <option value="waste">🗑️ Waste Management</option>
+                <option value="water">💧 Water & Drainage</option>
+                <option value="parks">🌳 Parks & Recreation</option>
+                <option value="other">📋 Other</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="issueDescription" class="block text-sm font-semibold mb-3 text-gray-700">Description</label>
+            <textarea id="issueDescription" name="description" required
+              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 h-32 resize-none"
+              placeholder="Provide detailed information about the issue"></textarea>
+          </div>
+          <div>
+            <label for="issueLocation" class="block text-sm font-semibold mb-3 text-gray-700">Location</label>
+            <input type="text" id="issueLocation" name="location" required
+              class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200"
+              placeholder="Street address or nearby landmark">
+          </div>
+          <div>
+            <label for="issueImage" class="block text-sm font-semibold mb-3 text-gray-700">Upload Image</label>
+            <div
+              class="relative border-2 border-dashed border-gray-300 rounded-xl p-6 hover:border-teal-400 transition-colors duration-200">
+              <input type="file" id="issueImage" name="image" accept="image/*"
+                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+              <div class="text-center">
+                <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                  </path>
+                </svg>
+                <p class="text-gray-600">Click to upload or drag and drop</p>
+                <p class="text-sm text-gray-400 mt-1">PNG, JPG up to 10MB</p>
+              </div>
+            </div>
+          </div>
+          <button type="submit"
+            class="w-full bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg text-lg">
+            Submit Report
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- View Issues Page -->
+    <div id="viewPage" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="glass-card rounded-2xl shadow-2xl overflow-hidden">
+        <div class="bg-gradient-to-r from-teal-500 to-cyan-600 px-8 py-6">
+          <div class="flex items-center">
+            <svg class="w-8 h-8 text-white mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+              </path>
+            </svg>
+            <div>
+              <h2 class="font-heading text-3xl font-bold text-white">Community Issues</h2>
+              <p class="text-teal-100 mt-1">Track and support issues in your area</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-8">
+          <div id="issuesList" class="space-y-6">
+            <div id="loadingState" class="text-center py-12">
+              <div
+                class="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500 mx-auto mb-4">
+              </div>
+              <p class="text-gray-500 text-lg">Loading issues...</p>
+            </div>
+            <div id="emptyState" class="text-center py-16 hidden">
+              <svg class="w-20 h-20 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                </path>
+              </svg>
+              <h3 class="text-xl font-semibold text-gray-500 mb-3">No issues reported yet</h3>
+              <p class="text-gray-400 mb-6">Be the first to report an issue in your community!</p>
+              <button id="goToReport"
+                class="bg-gradient-to-r from-teal-500 to-cyan-600 text-white px-6 py-3 rounded-xl font-medium hover:from-teal-600 hover:to-cyan-700 transition-all duration-200">
+                Report an Issue
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <!-- Admin Dashboard -->
+<div id="adminDashboard" class="hidden">
+  <!-- Navigation -->
+  <nav class="bg-card border-b border-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <h1 class="font-heading text-xl font-black text-cyan-600">sahaay Admin</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+          <span id="adminName" class="text-sm text-muted-foreground"></span>
+          <button id="adminLogoutBtn" class="text-sm text-red-600 hover:underline">Logout</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Admin Content -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div class="card p-6">
+        <div class="flex items-center">
+          <div class="p-2 bg-cyan-100 rounded-lg">
+            <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-gray-500">Total Issues</p>
+            <p id="totalIssues" class="text-2xl font-bold">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-6">
+        <div class="flex items-center">
+          <div class="p-2 bg-blue-100 rounded-lg">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-gray-500">Pending</p>
+            <p id="pendingIssues" class="text-2xl font-bold">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-6">
+        <div class="flex items-center">
+          <div class="p-2 bg-sky-100 rounded-lg">
+            <svg class="w-6 h-6 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-gray-500">In Progress</p>
+            <p id="inProgressIssues" class="text-2xl font-bold">0</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-6">
+        <div class="flex items-center">
+          <div class="p-2 bg-teal-100 rounded-lg">
+            <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-gray-500">Resolved</p>
+            <p id="resolvedIssues" class="text-2xl font-bold">0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Issues Management Table -->
+    <div class="card p-6">
+      <h2 class="font-heading text-xl font-bold mb-6 text-cyan-700">Manage Issues</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-gray-200">
+              <th class="text-left py-3 px-4 font-medium">ID</th>
+              <th class="text-left py-3 px-4 font-medium">Title</th>
+              <th class="text-left py-3 px-4 font-medium">Category</th>
+              <th class="text-left py-3 px-4 font-medium">Location</th>
+              <th class="text-left py-3 px-4 font-medium">Status</th>
+              <th class="text-left py-3 px-4 font-medium">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminIssuesList">
+            <!-- Issues will be loaded here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
+
