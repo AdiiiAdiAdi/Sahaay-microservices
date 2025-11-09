@@ -42,10 +42,10 @@ pipeline {
                     sh '''
                     echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
                     
-                    docker push adiiiadiadi/report-service:latest
-                    docker push adiiiadiadi/view-service:latest
-                    docker push adiiiadiadi/auth-service:latest
-                    docker push adiiiadiadi/sahaay-frontend:latest
+                    docker push aditya7330/report-service:latest
+                    docker push aditya7330/view-service:latest
+                    docker push aditya7330/auth-service:latest
+                    docker push aditya7330/sahaay-frontend:latest
                     '''
                 }
             }
@@ -63,18 +63,18 @@ pipeline {
 
                     docker run -d -p 8002:80 \
                         -e DB_HOST=$DB_HOST -e DB_USER=$DB_USER -e DB_PASS=$DB_PASS -e DB_NAME=$DB_NAME \
-                        --name report-service adiiiadiadi/report-service:latest
+                        --name report-service aditya7330/report-service:latest
 
                     docker run -d -p 8003:80 \
                         -e DB_HOST=$DB_HOST -e DB_USER=$DB_USER -e DB_PASS=$DB_PASS -e DB_NAME=$DB_NAME \
-                        --name view-service adiiiadiadi/view-service:latest
+                        --name view-service aditya7330/view-service:latest
 
                     docker run -d -p 8001:80 \
                         -e DB_HOST=$DB_HOST -e DB_USER=$DB_USER -e DB_PASS=$DB_PASS -e DB_NAME=$DB_NAME \
-                        --name auth-service adiiiadiadi/auth-service:latest
+                        --name auth-service aditya7330/auth-service:latest
 
                     docker run -d -p 80:80 \
-                        --name sahaay-frontend adiiiadiadi/sahaay-frontend:latest
+                        --name sahaay-frontend aditya7330/sahaay-frontend:latest
                     '''
                 }
             }
