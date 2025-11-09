@@ -6,9 +6,9 @@ pipeline {
         GITHUB_CREDENTIALS = credentials('newtoken')
         AWS_DEFAULT_REGION = 'ap-south-1'
 
-        DB_HOST = 'database-1.sq4qhc.ap-south-1.rds.amazonaws.com'
+        DB_HOST = 'database-1.cv0ug8sq4qhc.ap-south-1.rds.amazonaws.com'
         DB_USER = 'admin'
-        DB_PASS = 'abc'
+        DB_PASS = 'Aditya1234'
         DB_NAME = 'city_records'
     }
 
