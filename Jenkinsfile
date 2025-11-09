@@ -26,10 +26,10 @@ pipeline {
                 script {
                     echo 'Building all microservice Docker images...'
                     sh '''
-                    cd report-service && docker build -t adiiiadiadi/report-service:latest . && cd ..
-                    cd view-service && docker build -t adiiiadiadi/view-service:latest . && cd ..
-                    cd auth-service && docker build -t adiiiadiadi/auth-service:latest . && cd ..
-                    cd frontend && docker build -t adiiiadiadi/sahaay-frontend:latest . && cd ..
+                    cd report-service && docker build -t aditya7330/report-service:latest . && cd ..
+                    cd view-service && docker build -t aditya7330/view-service:latest . && cd ..
+                    cd auth-service && docker build -t aditya7330/auth-service:latest . && cd ..
+                    cd frontend && docker build -t aditya7330/sahaay-frontend:latest . && cd ..
                     '''
                 }
             }
