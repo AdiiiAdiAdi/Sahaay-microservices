@@ -23,7 +23,7 @@ $location = $_POST['location'] ?? '';
 $user_id = $_POST['userId'] ?? null;
 
 // AWS S3 configuration
-$bucketName = 'sahaay-reports';
+$bucketName = 'sahaay';
 $region = 'ap-south-1';
 
 // Replace these with your actual AWS credentials
@@ -31,8 +31,8 @@ $s3 = new S3Client([
     'version' => 'latest',
     'region' => $region,
     'credentials' => [
-        'key'    => 'YOUR_AWS_ACCESS_KEY',
-        'secret' => 'YOUR_AWS_SECRET_KEY'
+        'key'    => 'AKIAQODIJV2533X3PUEY',
+        'secret' => 'qOnzDPOlldfkIDiIP1S8aGub+Hw//v5VDkO9G+na'
     ]
 ]);
 
@@ -87,3 +87,4 @@ try {
 
 $conn->close();
 ?>
+
