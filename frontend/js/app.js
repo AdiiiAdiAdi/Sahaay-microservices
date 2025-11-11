@@ -144,38 +144,56 @@ function showDashboard() {
   }
 }
 
-// ----------------- REPORT ISSUE -----------------
+// ----------------- REPORT ISSUE (S3 / Lambda compatible) -----------------
 async function handleReportSubmit(e) {
   e.preventDefault();
   const formData = new FormData(e.target);
   formData.append("userId", currentUser.id);
 
   try {
-    const response = await fetch(`${REPORT_API}/report.php`, {
+    const res = await fetch(`${REPORT_API}/report.php`, {
       method: "POST",
       body: formData,
     });
-    const result = await response.json();
 
-    if (result.success) {
-      alert("Issue reported successfully!");
+    const contentType = res.headers.get("content-type") || "";
+    const text = await res.text();
+    let result = {};
+    if (contentType.includes("application/json")) {
+      result = JSON.parse(text);
+    } else {
+      console.warn("Non-JSON response:", text);
+      throw new Error(`Server returned non-JSON response (status ${res.status})`);
+    }
+
+    if (res.ok && result.success) {
+      alert(result.message || "Issue reported successfully!");
       e.target.reset();
       showViewPage();
     } else {
-      alert("Failed to submit issue: " + result.message);
+      alert("Failed to submit issue: " + (result.message || "Unknown error"));
     }
   } catch (error) {
     console.error("Submit error:", error);
-    alert("Network error while submitting issue.");
+    alert("Network error while submitting issue. " + error.message);
   }
 }
 
 // ----------------- VIEW ISSUES -----------------
 async function loadIssues() {
   try {
-    const response = await fetch(`${VIEW_API}/view.php`);
-    const result = await response.json();
-    if (result.success) issues = result.issues;
+    const res = await fetch(`${VIEW_API}/view.php`);
+    const text = await res.text();
+    const contentType = res.headers.get("content-type") || "";
+
+    if (contentType.includes("application/json")) {
+      const result = JSON.parse(text);
+      if (result.success && Array.isArray(result.issues)) {
+        issues = result.issues;
+      }
+    } else {
+      console.warn("Unexpected response while loading issues:", text);
+    }
   } catch (error) {
     console.error("Load issues error:", error);
   }
@@ -212,10 +230,9 @@ function createIssueCard(issue) {
     resolved: "bg-green-100 text-green-800 border-green-200",
   };
 
-  // ✅ Handle image URL (with fallback for relative paths)
   let imageUrl = issue.image_url;
   if (imageUrl && !imageUrl.startsWith("http")) {
-    imageUrl = "http://43.204.140.219:8002/" + imageUrl.replace(/^\/+/, "");
+    imageUrl = `${REPORT_API}/${imageUrl.replace(/^\/+/, "")}`;
   }
 
   const imageHtml = imageUrl
@@ -243,7 +260,6 @@ function createIssueCard(issue) {
       <span>${issue.location}</span>
     </div>
   `;
-
   return div;
 }
 
